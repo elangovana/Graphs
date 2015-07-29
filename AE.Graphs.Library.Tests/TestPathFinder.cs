@@ -1,15 +1,15 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace AE.Graphs.Library.Tests
 {
     /// <summary>
     ///     Summary description for TestCycleFinder
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class TestPathinder
     {
-        [TestMethod]
+        [Test]
         public void TestPathCountCase1()
         {
             const string graphString = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7";

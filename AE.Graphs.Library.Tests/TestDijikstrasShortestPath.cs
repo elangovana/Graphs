@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using AE.Graphs.Core;
 using AE.Graphs.Library.Exceptions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using NUnit.Framework;
 using Rhino.Mocks;
 
 namespace AE.Graphs.Library.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TestDijikstrasShortestPath
     {
         private const string Gseparator = ", ";
@@ -15,7 +16,7 @@ namespace AE.Graphs.Library.Tests
         private RailwayNetworkWeightedDigraph<char> _graph;
 
 
-        [TestInitialize]
+        [SetUp]
         public void InitTest()
         {
             _graph = new RailwayNetworkWeightedDigraph<char>();
@@ -28,7 +29,7 @@ namespace AE.Graphs.Library.Tests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestShortestPathWeightCase1()
         {
             var result = new DijkstrasShortestPathAlgorithm<char>().GetShortestPath(_graph, 'A', 'C').PathWeight;
@@ -36,7 +37,7 @@ namespace AE.Graphs.Library.Tests
             Assert.AreEqual(9, result);
         }
 
-        [TestMethod]
+        [Test]
         public void TestShortestPathWeightNoPathCase2()
         {
             _graph.AddNode('X');
@@ -45,7 +46,7 @@ namespace AE.Graphs.Library.Tests
             Assert.IsNull(result);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof (InvalidEdgeWeightException))]
         public void TestShortestPathNegativeWeight()
         {

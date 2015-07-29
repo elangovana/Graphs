@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace AE.Graphs.Library.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TestWeightedGraph
     {
         private const string Gseparator = ", ";
@@ -13,7 +13,7 @@ namespace AE.Graphs.Library.Tests
         private string[] _edgeStrings;
         private RailwayNetworkWeightedDigraph<char> _graph;
 
-        [TestInitialize]
+        [SetUp]
         public void TestInit()
         {
             _graph = new RailwayNetworkWeightedDigraph<char>();
@@ -21,7 +21,7 @@ namespace AE.Graphs.Library.Tests
         }
 
 
-        [TestMethod]
+        [Test]
         public void TestEdgesMatch()
         {
             foreach (var edgeString in _edgeStrings)

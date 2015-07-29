@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using AE.Graphs.Core.Exceptions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace AE.Graphs.Library.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TestAlgorithmPathFinder
     {
         private const string Gseparator = ", ";
@@ -14,7 +14,7 @@ namespace AE.Graphs.Library.Tests
         private RailwayNetworkWeightedDigraph<char> _graph;
 
 
-        [TestInitialize]
+        [SetUp]
         public void InitTest()
         {
             _graph = new RailwayNetworkWeightedDigraph<char>();
@@ -27,7 +27,7 @@ namespace AE.Graphs.Library.Tests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestPathWeightCase1()
         {
             const string nodesString = "A-B-C";
@@ -37,7 +37,7 @@ namespace AE.Graphs.Library.Tests
             Assert.AreEqual(9, result);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPathWeightCase2()
         {
             const string nodesString = "A-D";
@@ -47,7 +47,7 @@ namespace AE.Graphs.Library.Tests
             Assert.AreEqual(5, result);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPathWeightCase3()
         {
             const string nodesString = "A-D-C";
@@ -57,7 +57,7 @@ namespace AE.Graphs.Library.Tests
             Assert.AreEqual(13, result);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPathWeightCase4()
         {
             const string nodesString = "A-E-B-C-D";
@@ -68,7 +68,7 @@ namespace AE.Graphs.Library.Tests
         }
 
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof (EdgeNotFoundException))]
         public void TestPathWeightCase5()
         {

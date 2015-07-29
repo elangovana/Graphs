@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace AE.Graphs.Library.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TestPathOperations
     {
-        [TestMethod]
+        [Test]
         public void TestPathCountCase2()
         {
             const string graphString = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7";

@@ -14,7 +14,7 @@ namespace AE.Graphs.Library.Tests
         private RailwayNetworkWeightedDigraph<char> _graph;
 
 
-        [TestFixtureSetUp]
+        [SetUp]
         public void InitTest()
         {
             _graph = new RailwayNetworkWeightedDigraph<char>();
@@ -36,7 +36,7 @@ namespace AE.Graphs.Library.Tests
             _graph.AddEdge('6', '4', 1);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldTraverseBasicGraph()
         {
             var target = new DepthFirstSearch<char>();
@@ -66,7 +66,7 @@ namespace AE.Graphs.Library.Tests
         }
 
 
-        [TestCase()]
+        [Test]
         public void ShouldTraverseGraphWithBackEdges()
         {
             var target = new DepthFirstSearch<char>();
@@ -91,7 +91,7 @@ namespace AE.Graphs.Library.Tests
             Assert.IsTrue(expected.SequenceEqual(actual));
         }
 
-        [TestCase()]
+        [Test]
         public void ShouldTraverseAllEdges()
         {
             var target = new DepthFirstSearch<char>();
