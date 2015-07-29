@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace AE.Graphs.Core
 {
+    /// <summary>
+    /// Represents a graph path. 
+    /// Technical definition of a graph path: A path is a trail in which all vertices (except perhaps the first and last ones) are distinct. 
+    /// </summary>
+    /// <typeparam name="TNode">Represents the type of the node</typeparam>
     public abstract class AbstractGraphPath<TNode> : IComparable<AbstractGraphPath<TNode>>
     {
         public virtual TNode SourceNode { get; set; }

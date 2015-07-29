@@ -1,24 +1,19 @@
 ﻿namespace AE.Graphs.Core
 {
-    internal class AdjacentNodeEdge<TNode> : AbstractAdjacentNodeEdge<TNode>
+    /// <summary>
+    /// This is to help represent the adjacent node in a adjaceny list
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
+    public class AdjacentNodeEdge<TNode>
     {
-        private TNode _node;
-        private int _weight;
-
-        public AdjacentNodeEdge(TNode node, int weight)
+        public AdjacentNodeEdge(TNode node, int weight) 
         {
-            _node = node;
-            _weight = weight;
+            Node = node;
+            Weight = weight;
         }
 
-        public override int Weight
-        {
-            get { return _weight; }
-        }
+        public int Weight { get; private set; }
 
-        public override TNode Node
-        {
-            get { return _node; }
-        }
+        public TNode Node { get; private set; }
     }
 }

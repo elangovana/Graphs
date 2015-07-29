@@ -56,7 +56,7 @@ namespace AE.Graphs.Library
 
         public override int GetEdgeWeight(TNode fromNode, TNode toNode)
         {
-            AbstractAdjacentNodeEdge<TNode> edgeNode;
+            AdjacentNodeEdge<TNode> edgeNode;
 
             var source = GetGraphNode(fromNode);
             var dest = GetGraphNode(toNode);
@@ -77,7 +77,7 @@ namespace AE.Graphs.Library
             AdjacencyList.Add(graphNode);
         }
 
-        public void AddEdge(AbstractAdjacentGraphNode<TNode> graphNode, AbstractAdjacentNodeEdge<TNode> adjacentNodeEdge)
+        public void AddEdge(AbstractAdjacentGraphNode<TNode> graphNode, AdjacentNodeEdge<TNode> adjacentNodeEdge)
         {
             //Validate Arguments
             if (graphNode == null) throw new ArgumentNullException("graphNode");
@@ -91,7 +91,7 @@ namespace AE.Graphs.Library
                     string.Format("The edge weight {0} is invalid. It must be greater than zero",
                                   adjacentNodeEdge.Weight));
 
-            AbstractAdjacentNodeEdge<TNode> existingNodeEdge;
+            AdjacentNodeEdge<TNode> existingNodeEdge;
             if (TryGetEdge(graphNode.Node, adjacentNodeEdge.Node, out existingNodeEdge))
             {
                 throw new DuplicateEdgeException(
@@ -144,7 +144,7 @@ namespace AE.Graphs.Library
             return result;
         }
 
-        private bool TryGetEdge(TNode source, TNode destination, out AbstractAdjacentNodeEdge<TNode> nodeedge)
+        private bool TryGetEdge(TNode source, TNode destination, out AdjacentNodeEdge<TNode> nodeedge)
         {
             nodeedge = null;
             if (DoesNodeExist(source))

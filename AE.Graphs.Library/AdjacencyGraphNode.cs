@@ -8,19 +8,19 @@ namespace AE.Graphs.Library
     internal class AdjacencyGraphNode<TNode> : AbstractAdjacentGraphNode<TNode>
     {
         private readonly TNode _node;
-        private List<AbstractAdjacentNodeEdge<TNode>> _adjacentNodeEdges;
+        private List<AdjacentNodeEdge<TNode>> _adjacentNodeEdges;
 
         public AdjacencyGraphNode(TNode node)
         {
             _node = node;
         }
 
-        private List<AbstractAdjacentNodeEdge<TNode>> AdjacentNodeEdges
+        private List<AdjacentNodeEdge<TNode>> AdjacentNodeEdges
         {
-            get { return _adjacentNodeEdges ?? (_adjacentNodeEdges = new List<AbstractAdjacentNodeEdge<TNode>>()); }
+            get { return _adjacentNodeEdges ?? (_adjacentNodeEdges = new List<AdjacentNodeEdge<TNode>>()); }
         }
 
-        public override List<AbstractAdjacentNodeEdge<TNode>> Neighbours
+        public override List<AdjacentNodeEdge<TNode>> Neighbours
         {
             get { return AdjacentNodeEdges; }
         }
@@ -30,7 +30,7 @@ namespace AE.Graphs.Library
             get { return _node; }
         }
 
-        public override void AddEdgeNeighbour(AbstractAdjacentNodeEdge<TNode> adjacentNodeEdge)
+        public override void AddEdgeNeighbour(AdjacentNodeEdge<TNode> adjacentNodeEdge)
         {
             AdjacentNodeEdges.Add(adjacentNodeEdge);
         }

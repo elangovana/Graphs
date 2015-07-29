@@ -13,6 +13,7 @@ namespace AE.Graphs.Core
         public abstract List<Tuple<TNode, TNode, int>> AllEdges { get; }
 
         public abstract List<TNode> AllNodes { get; }
+
         public abstract void AddNode(TNode node);
 
         public abstract List<TNode> GetNeighbourNodes(TNode node);
