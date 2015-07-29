@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using AE.Graphs.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace AE.Graphs.Library.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TestAlgorithmDFS
     {
         private RailwayNetworkWeightedDigraph<char> _graph;
 
 
-        [TestInitialize]
+        [TestFixtureSetUp]
         public void InitTest()
         {
             _graph = new RailwayNetworkWeightedDigraph<char>();
@@ -35,8 +36,8 @@ namespace AE.Graphs.Library.Tests
             _graph.AddEdge('6', '4', 1);
         }
 
-        [TestMethod]
-        public void TestDFSTreeEdges()
+        [TestCase]
+        public void ShouldTraverseBasicGraph()
         {
             var target = new DepthFirstSearch<char>();
 
@@ -65,8 +66,8 @@ namespace AE.Graphs.Library.Tests
         }
 
 
-        [TestMethod]
-        public void TestDFSBackEdges()
+        [TestCase()]
+        public void ShouldTraverseGraphWithBackEdges()
         {
             var target = new DepthFirstSearch<char>();
 
@@ -90,8 +91,8 @@ namespace AE.Graphs.Library.Tests
             Assert.IsTrue(expected.SequenceEqual(actual));
         }
 
-        [TestMethod]
-        public void TestAllEdges()
+        [TestCase()]
+        public void ShouldTraverseAllEdges()
         {
             var target = new DepthFirstSearch<char>();
 

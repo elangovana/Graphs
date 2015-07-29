@@ -68,7 +68,7 @@ namespace AE.Graphs.Library
 
         #endregion
 
-        public void AddNode(AbstractAdjacenyGraphNode<TNode> graphNode)
+        public void AddNode(AbstractAdjacentGraphNode<TNode> graphNode)
         {
             if (graphNode == null) throw new ArgumentNullException("graphNode");
             if (DoesNodeExist(graphNode.Node))
@@ -77,7 +77,7 @@ namespace AE.Graphs.Library
             AdjacencyList.Add(graphNode);
         }
 
-        public void AddEdge(AbstractAdjacenyGraphNode<TNode> graphNode, AbstractAdjacentNodeEdge<TNode> adjacentNodeEdge)
+        public void AddEdge(AbstractAdjacentGraphNode<TNode> graphNode, AbstractAdjacentNodeEdge<TNode> adjacentNodeEdge)
         {
             //Validate Arguments
             if (graphNode == null) throw new ArgumentNullException("graphNode");
@@ -109,14 +109,14 @@ namespace AE.Graphs.Library
 
         #region
 
-        private List<AbstractAdjacenyGraphNode<TNode>> _adjacenylist;
+        private List<AbstractAdjacentGraphNode<TNode>> _adjacenylist;
 
-        private List<AbstractAdjacenyGraphNode<TNode>> AdjacencyList
+        private List<AbstractAdjacentGraphNode<TNode>> AdjacencyList
         {
-            get { return _adjacenylist ?? (_adjacenylist = new List<AbstractAdjacenyGraphNode<TNode>>()); }
+            get { return _adjacenylist ?? (_adjacenylist = new List<AbstractAdjacentGraphNode<TNode>>()); }
         }
 
-        private AbstractAdjacenyGraphNode<TNode> AddNodeIfDoesntExist(TNode node)
+        private AbstractAdjacentGraphNode<TNode> AddNodeIfDoesntExist(TNode node)
         {
             if (!DoesNodeExist(node)) AddNode(node);
             return GetGraphNode(node);
@@ -127,12 +127,12 @@ namespace AE.Graphs.Library
             return (TryGetGraphNode(node) != null);
         }
 
-        private AbstractAdjacenyGraphNode<TNode> TryGetGraphNode(TNode node)
+        private AbstractAdjacentGraphNode<TNode> TryGetGraphNode(TNode node)
         {
             return AdjacencyList.SingleOrDefault(x => x.Node.Equals(node));
         }
 
-        private AbstractAdjacenyGraphNode<TNode> GetGraphNode(TNode node)
+        private AbstractAdjacentGraphNode<TNode> GetGraphNode(TNode node)
         {
             var result = TryGetGraphNode(node);
 

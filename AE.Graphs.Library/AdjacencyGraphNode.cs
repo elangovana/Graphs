@@ -5,7 +5,7 @@ using AE.Graphs.Core;
 
 namespace AE.Graphs.Library
 {
-    internal class AdjacencyGraphNode<TNode> : AbstractAdjacenyGraphNode<TNode>
+    internal class AdjacencyGraphNode<TNode> : AbstractAdjacentGraphNode<TNode>
     {
         private readonly TNode _node;
         private List<AbstractAdjacentNodeEdge<TNode>> _adjacentNodeEdges;

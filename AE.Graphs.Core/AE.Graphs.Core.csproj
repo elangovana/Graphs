@@ -48,8 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractAdjacentNodeEdge.cs" />
-    <Compile Include="AbstractAdjacenyListGraphNode.cs" />
+    <Compile Include="AbstractAdjacentGraphNode.cs" />
     <Compile Include="AbstractGraph.cs" />
+    <Compile Include="AdjacentNodeEdge.cs" />
     <Compile Include="DepthFirstSearchEdgeType.cs" />
     <Compile Include="DepthFirstSearchEdge.cs" />
     <Compile Include="Exceptions\DuplicateNodeException.cs" />

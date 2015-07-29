@@ -2,7 +2,7 @@
 
 namespace AE.Graphs.Core
 {
-    public abstract class AbstractAdjacenyGraphNode<TNode>
+    public abstract class AbstractAdjacentGraphNode<TNode>
     {
         public abstract List<AbstractAdjacentNodeEdge<TNode>> Neighbours { get; }
 
