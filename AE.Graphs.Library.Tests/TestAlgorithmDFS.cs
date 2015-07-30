@@ -1,113 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.Linq;
 using AE.Graphs.Core;
 using NUnit.Framework;
-
 
 namespace AE.Graphs.Library.Tests
 {
     [TestFixture]
     public class TestAlgorithmDFS
     {
-        private RailwayNetworkWeightedDigraph<char> _graph;
-
-
-        [SetUp]
-        public void InitTest()
+        [TestCase("121-231-261-341-361-451-461-561-621-631-641", "121-231-341-451-561")]
+        public void ShouldReturnDfsTreeEdges(string graph, string expected)
         {
-            _graph = new RailwayNetworkWeightedDigraph<char>();
-            _graph.AddEdge('1', '2', 1);
+            //Arrange
+            var sut = new DepthFirstSearch<char>();
 
-            _graph.AddEdge('2', '3', 1);
-            _graph.AddEdge('2', '6', 1);
-
-            _graph.AddEdge('3', '4', 1);
-            _graph.AddEdge('3', '6', 1);
-
-            _graph.AddEdge('4', '5', 1);
-            _graph.AddEdge('4', '6', 1);
-
-            _graph.AddEdge('5', '6', 1);
-
-            _graph.AddEdge('6', '2', 1);
-            _graph.AddEdge('6', '3', 1);
-            _graph.AddEdge('6', '4', 1);
-        }
-
-        [Test]
-        public void ShouldTraverseBasicGraph()
-        {
-            var target = new DepthFirstSearch<char>();
-
-            var result = target.TraverseGraph(_graph);
-
-            IEnumerable<Tuple<char, char>> expected = new BindingList<Tuple<char, char>>()
-                {
-                    new Tuple<char, char>('1', '2')
-                    ,
-                    new Tuple<char, char>('2', '3')
-                    ,
-                    new Tuple<char, char>('3', '4')
-                    ,
-                    new Tuple<char, char>('4', '5')
-                    ,
-                    new Tuple<char, char>('5', '6')
-                };
-
+            //Act
+            var result = sut.TraverseGraph(GraphLoaderHelper.LoadGraphFromString(graph));
             var actual =
                 result.Where(x => x.EdgeType == DepthFirstSearchEdgeType.TreeEdge)
-                      .Select(x => new Tuple<char, char>(x.SourceNode, x.DestinationNode))
-                      .OrderBy(x => x.Item1)
-                      .ThenBy(x => x.Item2);
+                    .OrderBy(x => x.SourceNode)
+                    .ThenBy(x => x.DestinationNode).ConvertDfsEdgeToString();
 
-            Assert.IsTrue(expected.SequenceEqual(actual));
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
-
-        [Test]
-        public void ShouldTraverseGraphWithBackEdges()
+        [TestCase("121-231-261-341-361-451-461-561-621-631-641", "621-631-641")]
+        public void ShouldReturnDfsBackEdges(string graph, string expected)
         {
-            var target = new DepthFirstSearch<char>();
+            var sut = new DepthFirstSearch<char>();
 
-            var result = target.TraverseGraph(_graph);
+            var result = sut.TraverseGraph(GraphLoaderHelper.LoadGraphFromString(graph));
 
-            IEnumerable<Tuple<char, char>> expected = new BindingList<Tuple<char, char>>()
-                {
-                    new Tuple<char, char>('6', '2')
-                    ,
-                    new Tuple<char, char>('6', '3')
-                    ,
-                    new Tuple<char, char>('6', '4')
-                };
 
             var actual =
                 result.Where(x => x.EdgeType == DepthFirstSearchEdgeType.BackEdge)
-                      .Select(x => new Tuple<char, char>(x.SourceNode, x.DestinationNode))
-                      .OrderBy(x => x.Item1)
-                      .ThenBy(x => x.Item2);
+                    .OrderBy(x => x.SourceNode)
+                    .ThenBy(x => x.DestinationNode)
+                    .ConvertDfsEdgeToString();
 
-            Assert.IsTrue(expected.SequenceEqual(actual));
+            Assert.AreEqual(expected, actual);
         }
 
-        [Test]
-        public void ShouldTraverseAllEdges()
+        [TestCase("121-231-261-341-361-451-461-561-621-631-641", "121-231-261-341-361-451-461-561-621-631-641")]
+        public void ShouldTraverseAllEdges(string graph, string expected)
         {
-            var target = new DepthFirstSearch<char>();
+            //Arrange
+            var sut = new DepthFirstSearch<char>();
 
-            var result = target.TraverseGraph(_graph);
-
-            var expected =
-                _graph.AllEdges.Select(x => new Tuple<char, char>(x.Item1, x.Item2))
-                      .OrderBy(x => x.Item1)
-                      .ThenBy(x => x.Item2);
+            //Act
+            var result = sut.TraverseGraph(GraphLoaderHelper.LoadGraphFromString(graph));
             var actual =
-                result.Select(x => new Tuple<char, char>(x.SourceNode, x.DestinationNode))
-                      .OrderBy(x => x.Item1)
-                      .ThenBy(x => x.Item2);
+                result.OrderBy(x => x.SourceNode)
+                    .ThenBy(x => x.DestinationNode)
+                    .ConvertDfsEdgeToString();
 
-            Assert.IsTrue(expected.SequenceEqual(actual));
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }
