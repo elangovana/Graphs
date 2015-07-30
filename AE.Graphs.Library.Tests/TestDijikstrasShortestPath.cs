@@ -11,51 +11,49 @@ namespace AE.Graphs.Library.Tests
     [TestFixture]
     public class TestDijikstrasShortestPath
     {
-        private const string Gseparator = ", ";
-        private const string GraphString = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7";
-        private RailwayNetworkWeightedDigraph<char> _graph;
-
-
-        [SetUp]
-        public void InitTest()
+        
+        [TestCase("AB5 - BC4 - CD8 - DC8 - DE6 - AD5 - CE2 - EB3 - AE7" , 'A', 'C', 9)]
+        public void ShouldCalculateShortestPathLength(string igraph, char isourceNode, char idestinationNode, int expectedShortedPathLength)
         {
-            _graph = new RailwayNetworkWeightedDigraph<char>();
+            //Arrange
+            var sut = new DijkstrasShortestPathAlgorithm<char>();
+            var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
 
+            //Act
+            var result = sut.GetShortestPath(graph, isourceNode, idestinationNode ).PathWeight;
 
-            var edgeStrings = GraphString.Split(new[] {Gseparator}, StringSplitOptions.None);
-            foreach (var edgeString in edgeStrings)
-            {
-                _graph.AddEdge(edgeString[0], edgeString[1], Convert.ToInt32(edgeString[2].ToString()));
-            }
+            //Assert
+            Assert.AreEqual(expectedShortedPathLength, result);
         }
 
-        [Test]
-        public void TestShortestPathWeightCase1()
+        [TestCase("AB5 - BC4 - CD8 - DC8 - DE6 - AD5 - CE2 - EB3 - AE7 - XW7", 'A', 'X')]
+        public void ShouldReturnNullWhenNoPathExistsGivenSourceAndDestinationNode(string igraph, char isourceNode, char idestinationNode)
         {
-            var result = new DijkstrasShortestPathAlgorithm<char>().GetShortestPath(_graph, 'A', 'C').PathWeight;
+            //Arrange
+            var sut = new DijkstrasShortestPathAlgorithm<char>();
+            var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
 
-            Assert.AreEqual(9, result);
-        }
+            //Act
+            var result = sut.GetShortestPath(graph, isourceNode, idestinationNode);
 
-        [Test]
-        public void TestShortestPathWeightNoPathCase2()
-        {
-            _graph.AddNode('X');
-            var result = new DijkstrasShortestPathAlgorithm<char>().GetShortestPath(_graph, 'A', 'X');
-
+           //Assert
             Assert.IsNull(result);
         }
 
-        [Test]
-        [ExpectedException(typeof (InvalidEdgeWeightException))]
-        public void TestShortestPathNegativeWeight()
+        [TestCase('A', 'X', -1)]
+        public void ShouldThrowInvalidWeightExceptionGivenNegativeEdgeWeight(char isourceNode, char idestinationNode, int iedgeWeight)
         {
-            var _graphStub = MockRepository.GenerateStub<AbstractDiGraph<char>>();
+            //Arrange
+            var graphStub = MockRepository.GenerateStub<AbstractDiGraph<char>>();
+            graphStub.Stub(x => x.AllEdges)
+                      .Return(new List<Tuple<char, char, int>>() {new Tuple<char, char, int>(isourceNode, idestinationNode, iedgeWeight)});
 
-            _graphStub.Stub(x => x.AllEdges)
-                      .Return(new List<Tuple<char, char, int>>() {new Tuple<char, char, int>('A', 'X', -1)});
+            var sut = new DijkstrasShortestPathAlgorithm<char>();
+            
 
-            new DijkstrasShortestPathAlgorithm<char>().GetShortestPath(_graphStub, 'A', 'X');
+           //Act + assert
+            Assert.Throws<InvalidEdgeWeightException>(
+                () => sut.GetShortestPath(graphStub, isourceNode, idestinationNode));
         }
     }
 }
