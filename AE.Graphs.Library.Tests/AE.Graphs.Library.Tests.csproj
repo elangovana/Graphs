@@ -70,9 +70,8 @@
     <Compile Include="TestAlgorithmDFS.cs" />
     <Compile Include="TestCycleFinder.cs" />
     <Compile Include="TestDijikstrasShortestPath.cs" />
-    <Compile Include="TestAlgorithmPathFinder.cs" />
     <Compile Include="TestPathOperations.cs" />
-    <Compile Include="TestWeightedGraph.cs" />
+    <Compile Include="TestRailwayNetworkWeightedDigraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
