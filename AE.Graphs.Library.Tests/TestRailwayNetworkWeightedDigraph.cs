@@ -9,7 +9,7 @@ namespace AE.Graphs.Library.Tests
     public class TestRailwayNetworkWeightedDigraph
     {
         [TestCase('A', 'B', 5, 1)]
-        public void ShouldMatchEdgeCount(char iSourceNode, char iDestinationNode, int iEdgeWeight, int expectedNoOfEdges)
+        public void ShouldMatchEdgeCountWithInput(char iSourceNode, char iDestinationNode, int iEdgeWeight, int expectedNoOfEdges)
         {
             //Arrange
             var sut = new RailwayNetworkWeightedDigraph<char>();
@@ -23,7 +23,7 @@ namespace AE.Graphs.Library.Tests
         }
 
         [TestCase('A', 'B', 5, 2)]
-        public void ShouldMatchNodeCount(char iSourceNode, char iDestinationNode, int iEdgeWeight, int expectedNoOfNodes)
+        public void ShouldMatchNodeCountWithInput(char iSourceNode, char iDestinationNode, int iEdgeWeight, int expectedNoOfNodes)
         {
             //Arrange
             var sut = new RailwayNetworkWeightedDigraph<char>();
@@ -37,7 +37,7 @@ namespace AE.Graphs.Library.Tests
         }
 
         [TestCase('A', 'B', 5)]
-        public void ShouldMatchSourceNodeName(char iSourceNode, char iDestinationNode, int iEdgeWeight)
+        public void ShouldMatchSourceNodeNameWithInput(char iSourceNode, char iDestinationNode, int iEdgeWeight)
         {
             //Arrange
             var sut = new RailwayNetworkWeightedDigraph<char>();
@@ -51,7 +51,7 @@ namespace AE.Graphs.Library.Tests
         }
 
         [TestCase('A', 'B', 5)]
-        public void ShouldMatchDestinationNodeName(char iSourceNode, char iDestinationNode, int iEdgeWeight)
+        public void ShouldMatchDestinationNodeNameWithInput(char iSourceNode, char iDestinationNode, int iEdgeWeight)
         {
             //Arrange
             var sut = new RailwayNetworkWeightedDigraph<char>();
@@ -66,7 +66,7 @@ namespace AE.Graphs.Library.Tests
 
 
         [TestCase('A', 'B', 5)]
-        public void ShouldMatchEdgeWeight(char iSourceNode, char iDestinationNode, int iEdgeWeight)
+        public void ShouldMatchEdgeWeightWithInput(char iSourceNode, char iDestinationNode, int iEdgeWeight)
         {
             //Arrange
             var sut = new RailwayNetworkWeightedDigraph<char>();
