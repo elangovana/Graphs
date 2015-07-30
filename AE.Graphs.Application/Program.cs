@@ -41,6 +41,8 @@ namespace AE.Graphs.Application
             {
                 Console.WriteLine("An Error Has Occurred : {0}", ex.Message);
             }
+            Console.WriteLine("Press enter to exit");
+            Console.ReadLine();
         }
     }
 }

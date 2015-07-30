@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdjacencyGraphNode.cs" />
-    <Compile Include="AlgorithmPathWeight.cs" />
     <Compile Include="PathOperations.cs" />
     <Compile Include="CycleHelper.cs" />
     <Compile Include="CycleOperations.cs" />

@@ -57,7 +57,6 @@
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
     <Compile Include="IAlgorithmCycleFinder.cs" />
     <Compile Include="IAlgorithmDepthFirstSearch.cs" />
-    <Compile Include="IAlgorithmPathWeight.cs" />
     <Compile Include="IAlgorithmShortestPath.cs" />
     <Compile Include="IAlgorithmPathFinder.cs" />
     <Compile Include="ICycleOperations.cs" />

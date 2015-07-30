@@ -32,7 +32,7 @@ namespace AE.Graphs.Library.Tests
         {
             const string nodesString = "A-B-C";
 
-            var result = new AlgorithmPathWeight<char>().FindPathWeight(_graph, GetNodes(nodesString));
+            var result = _graph.FindPathWeight(GetNodes(nodesString));
 
             Assert.AreEqual(9, result);
         }
@@ -42,7 +42,7 @@ namespace AE.Graphs.Library.Tests
         {
             const string nodesString = "A-D";
 
-            var result = new AlgorithmPathWeight<char>().FindPathWeight(_graph, GetNodes(nodesString));
+            var result = _graph.FindPathWeight( GetNodes(nodesString));
 
             Assert.AreEqual(5, result);
         }
@@ -52,7 +52,7 @@ namespace AE.Graphs.Library.Tests
         {
             const string nodesString = "A-D-C";
 
-            var result = new AlgorithmPathWeight<char>().FindPathWeight(_graph, GetNodes(nodesString));
+            var result = _graph.FindPathWeight( GetNodes(nodesString));
 
             Assert.AreEqual(13, result);
         }
@@ -62,7 +62,7 @@ namespace AE.Graphs.Library.Tests
         {
             const string nodesString = "A-E-B-C-D";
 
-            var result = new AlgorithmPathWeight<char>().FindPathWeight(_graph, GetNodes(nodesString));
+            var result = _graph.FindPathWeight( GetNodes(nodesString));
 
             Assert.AreEqual(22, result);
         }
@@ -74,7 +74,7 @@ namespace AE.Graphs.Library.Tests
         {
             const string nodesString = "A-E-D";
 
-            var result = new AlgorithmPathWeight<char>().FindPathWeight(_graph, GetNodes(nodesString));
+            _graph.FindPathWeight( GetNodes(nodesString));
         }
 
         private static List<char> GetNodes(string nodesString)

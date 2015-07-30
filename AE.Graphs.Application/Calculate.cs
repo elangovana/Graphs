@@ -12,7 +12,7 @@ namespace AE.Graphs.Application
         private const string separator = ", ";
         private const int edgeLength = 3;
         private IAlgorithmCycleFinder<char> _CycleCountCalculator;
-        private IAlgorithmPathWeight<char> _PathWeightCalulator;
+     
         private ICycleOperations<char> _cyleOperationsCalculator;
         private AbstractDiGraph<Char> _graph;
         private IAlgorithmPathFinder<char> _pathCountCalculator;
@@ -34,11 +34,7 @@ namespace AE.Graphs.Application
             _graph = graph;
         }
 
-        public IAlgorithmPathWeight<char> PathWeightCalulator
-        {
-            get { return _PathWeightCalulator ?? (_PathWeightCalulator = new AlgorithmPathWeight<char>()); }
-            set { _PathWeightCalulator = value; }
-        }
+      
 
         public IAlgorithmCycleFinder<char> CycleCalculator
         {
@@ -152,7 +148,7 @@ namespace AE.Graphs.Application
             string result;
             try
             {
-                result = PathWeightCalulator.FindPathWeight(_graph, nodes).ToString();
+                result = _graph.FindPathWeight(nodes).ToString();
             }
             catch (EdgeNotFoundException)
             {
