@@ -39,7 +39,7 @@ namespace AE.Graphs.Library
 
         public IAlgorithmCycleFinder<TNode> CycleFinder
         {
-            get { return (_cycleFnder = _cycleFnder ?? new DCycleLeroyJohnson<TNode>()); }
+            get { return (_cycleFnder = _cycleFnder ?? new AlgorithmCycleFinder<TNode>()); }
             set { _cycleFnder = value; }
         }
 

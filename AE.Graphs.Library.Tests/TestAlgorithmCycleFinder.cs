@@ -9,7 +9,7 @@ namespace AE.Graphs.Library.Tests
     ///     Summary description for TestCycleFinder
     /// </summary>
     [TestFixture]
-    public class TestDCycleLeroyJohnson
+    public class TestAlgorithmCycleFinder
     {
       
 
@@ -19,7 +19,7 @@ namespace AE.Graphs.Library.Tests
         {
            //Arrange
             var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
-            var sut = new DCycleLeroyJohnson<char>();
+            var sut = new AlgorithmCycleFinder<char>();
 
             //Act
             var actual = sut.FindAllSimpleCycles(graph);
@@ -34,7 +34,7 @@ namespace AE.Graphs.Library.Tests
         {
             //Arrange
             var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
-            var sut = new DCycleLeroyJohnson<char>();
+            var sut = new AlgorithmCycleFinder<char>();
 
             //Act
             var actual = sut.FindAllSimpleCycles(graph, isourceNode, imaxStops);

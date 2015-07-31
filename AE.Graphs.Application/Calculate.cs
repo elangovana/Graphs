@@ -38,7 +38,7 @@ namespace AE.Graphs.Application
 
         public IAlgorithmCycleFinder<char> CycleCalculator
         {
-            get { return _CycleCountCalculator ?? (_CycleCountCalculator = new DCycleLeroyJohnson<char>()); }
+            get { return _CycleCountCalculator ?? (_CycleCountCalculator = new AlgorithmCycleFinder<char>()); }
             set { _CycleCountCalculator = value; }
         }
 

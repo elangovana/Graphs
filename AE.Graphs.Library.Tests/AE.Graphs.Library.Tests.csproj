@@ -68,7 +68,7 @@
     <Compile Include="TestCycleOperations.cs" />
     <Compile Include="TestPathFinder.cs" />
     <Compile Include="TestAlgorithmDFS.cs" />
-    <Compile Include="TestDCycleLeroyJohnson.cs" />
+    <Compile Include="TestAlgorithmCycleFinder.cs" />
     <Compile Include="TestDijikstrasShortestPath.cs" />
     <Compile Include="TestPathOperations.cs" />
     <Compile Include="TestRailwayNetworkWeightedDigraph.cs" />
