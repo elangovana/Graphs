@@ -195,9 +195,9 @@ namespace AE.Graphs.Application
 
         private string CalculateCyclesWithMaxWeight(char node, int maxWeight)
         {
-            var cycles = CycleCalculator.FindAllCycles(_graph, node, maxWeight);
+            var count = CycleCalculator.CountAllCycles(_graph, node, maxWeight);
 
-            return cycles.Count.ToString();
+            return count.ToString();
         }
     }
 }

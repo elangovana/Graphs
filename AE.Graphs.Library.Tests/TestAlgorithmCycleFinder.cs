@@ -53,10 +53,10 @@ namespace AE.Graphs.Library.Tests
             var sut = new CycleOperations<char>();
 
             //Act
-            var actual = sut.FindAllCycles(graph, isourceNode, imaxWeight).OrderBy(x => x.Path.Count).ToList();
+            var actual = sut.CountAllCycles(graph, isourceNode, imaxWeight);
 
             //Assert
-            Assert.AreEqual(expectedCycleCount, actual.Count);
+            Assert.AreEqual(expectedCycleCount, actual);
         }
        
 
