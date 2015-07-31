@@ -11,5 +11,7 @@ namespace AE.Graphs.Core
         List<AbstractGraphPath<TNode>> FindAllSimpleCycles(AbstractDiGraph<TNode> graph, TNode startNode);
 
         List<AbstractGraphPath<TNode>> FindAllSimpleCycles(AbstractDiGraph<TNode> graph, TNode startNode, int maxStops);
+
+        List<AbstractGraphPath<TNode>> FindAllCycles(AbstractDiGraph<TNode> graph, TNode startNode, int maxWeight);
     }
 }

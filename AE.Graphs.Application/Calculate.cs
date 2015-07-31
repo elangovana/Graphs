@@ -13,7 +13,7 @@ namespace AE.Graphs.Application
         private const int edgeLength = 3;
         private IAlgorithmCycleFinder<char> _CycleCountCalculator;
      
-        private ICycleOperations<char> _cyleOperationsCalculator;
+      
         private AbstractDiGraph<Char> _graph;
         private IAlgorithmPathFinder<char> _pathCountCalculator;
         private IPathOperations<char> _pathOperations;
@@ -55,11 +55,7 @@ namespace AE.Graphs.Application
             set { _pathCountCalculator = value; }
         }
 
-        public ICycleOperations<char> CycleOperationsCalculator
-        {
-            get { return _cyleOperationsCalculator ?? (_cyleOperationsCalculator = new CycleOperations<char>()); }
-            set { _cyleOperationsCalculator = value; }
-        }
+       
 
         public IPathOperations<char> PathOperationsCalculator
         {
@@ -199,7 +195,7 @@ namespace AE.Graphs.Application
 
         private string CalculateCyclesWithMaxWeight(char node, int maxWeight)
         {
-            var cycles = CycleOperationsCalculator.FindAllCycles(_graph, node, maxWeight);
+            var cycles = CycleCalculator.FindAllCycles(_graph, node, maxWeight);
 
             return cycles.Count.ToString();
         }

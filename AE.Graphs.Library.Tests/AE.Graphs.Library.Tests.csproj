@@ -65,7 +65,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="GraphLoaderHelper.cs" />
-    <Compile Include="TestCycleOperations.cs" />
     <Compile Include="TestPathFinder.cs" />
     <Compile Include="TestAlgorithmDFS.cs" />
     <Compile Include="TestAlgorithmCycleFinder.cs" />
