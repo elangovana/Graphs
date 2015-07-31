@@ -28,7 +28,7 @@ namespace AE.Graphs.Library
 
         public List<DepthFirstSearchEdge<TNode>> TraverseGraph(AbstractDiGraph<TNode> graph)
         {
-            foreach (var vertex in graph.AllNodes)
+            foreach (TNode vertex in graph.AllNodes)
             {
                 if (!IsNodeinParentOrChild(vertex))
                 {
@@ -58,21 +58,19 @@ namespace AE.Graphs.Library
         {
             _startTime[node] = ++_time;
 
-            foreach (var neighbour in graph.GetNeighbourNodes(node))
+            foreach (TNode neighbour in graph.GetNeighbourNodes(node))
             {
-                var dfsEdge = new DepthFirstSearchEdge<TNode>() {SourceNode = node, DestinationNode = neighbour};
+                var dfsEdge = new DepthFirstSearchEdge<TNode> {SourceNode = node, DestinationNode = neighbour};
                 dfsEdge.EdgeWeight = graph.GetEdgeWeight(dfsEdge.SourceNode, dfsEdge.DestinationNode);
                 _dfsEdges.Add(dfsEdge);
-                var isNeighbourVisited = IsNodeinParentOrChild(neighbour);
+                bool isNeighbourVisited = IsNodeinParentOrChild(neighbour);
 
-                if (!isNeighbourVisited || !IsNodeinParentOrChild(node))
+                if (!isNeighbourVisited)
                 {
                     _parent[neighbour] = node;
                     dfsEdge.EdgeType = DepthFirstSearchEdgeType.TreeEdge;
-                    if (!isNeighbourVisited)
-                    {
-                        DFSVisit(graph, neighbour);
-                    }
+
+                    DFSVisit(graph, neighbour);
                 }
                 else if (! _endTime.ContainsKey(neighbour))
                 {
