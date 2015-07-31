@@ -26,7 +26,7 @@ namespace AE.Graphs.Library
 
         private readonly List<Tuple<TNode, TNode, int>> _vistedEdges;
         private IAlgorithmDepthFirstSearch<TNode> _DFSAlgorithm;
-        private IAlgorithmCycleFinder<TNode> _cycleFnder;
+        private ICycleOperations<TNode> _cycleFnder;
         private List<Tuple<TNode, TNode, int>> _unvistedEdges;
 
 
@@ -37,9 +37,9 @@ namespace AE.Graphs.Library
         }
 
 
-        public IAlgorithmCycleFinder<TNode> CycleFinder
+        public ICycleOperations<TNode> CycleOperations
         {
-            get { return (_cycleFnder = _cycleFnder ?? new AlgorithmCycleFinder<TNode>()); }
+            get { return (_cycleFnder = _cycleFnder ?? new CycleOperations<TNode>()); }
             set { _cycleFnder = value; }
         }
 

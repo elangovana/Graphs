@@ -11,7 +11,7 @@ namespace AE.Graphs.Application
     {
         private const string separator = ", ";
         private const int edgeLength = 3;
-        private IAlgorithmCycleFinder<char> _CycleCountCalculator;
+        private ICycleOperations<char> _CycleCountCalculator;
      
       
         private AbstractDiGraph<Char> _graph;
@@ -36,9 +36,9 @@ namespace AE.Graphs.Application
 
       
 
-        public IAlgorithmCycleFinder<char> CycleCalculator
+        public ICycleOperations<char> CycleCalculator
         {
-            get { return _CycleCountCalculator ?? (_CycleCountCalculator = new AlgorithmCycleFinder<char>()); }
+            get { return _CycleCountCalculator ?? (_CycleCountCalculator = new CycleOperations<char>()); }
             set { _CycleCountCalculator = value; }
         }
 

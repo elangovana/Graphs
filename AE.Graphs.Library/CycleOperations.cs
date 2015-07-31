@@ -5,7 +5,7 @@ using AE.Graphs.Core;
 namespace AE.Graphs.Library
 {
    
-    public class AlgorithmCycleFinder<TNode> : IAlgorithmCycleFinder<TNode>
+    public class CycleOperations<TNode> : ICycleOperations<TNode>
     {
         private IAlgorithmElementaryCircuitSearch<TNode> _algorithmElementaryCircuitSearch;
 

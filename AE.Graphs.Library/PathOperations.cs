@@ -8,14 +8,14 @@ namespace AE.Graphs.Library
     {
         #region Private
 
-        private IAlgorithmCycleFinder<TNode> _cycleFnder;
+        private ICycleOperations<TNode> _cycleFnder;
         private IAlgorithmPathFinder<TNode> _pathFinder;
 
         #endregion
 
-        public IAlgorithmCycleFinder<TNode> CycleFinder
+        public ICycleOperations<TNode> CycleOperations
         {
-            get { return (_cycleFnder = _cycleFnder ?? new AlgorithmCycleFinder<TNode>()); }
+            get { return (_cycleFnder = _cycleFnder ?? new CycleOperations<TNode>()); }
             set { _cycleFnder = value; }
         }
 
@@ -33,7 +33,7 @@ namespace AE.Graphs.Library
         {
             var result = new List<AbstractGraphPath<TNode>>();
             var simplePaths = PathFinder.FindAllSimplePaths(graph, source, destination);
-            ComputePath(graph, numberOfStops, simplePaths, result, CycleFinder);
+            ComputePath(graph, numberOfStops, simplePaths, result, CycleOperations);
             return result;
         }
 
@@ -41,12 +41,12 @@ namespace AE.Graphs.Library
 
         private static void ComputePath(AbstractDiGraph<TNode> graph, int numberOfStops,
                                         List<AbstractGraphPath<TNode>> simplePaths,
-                                        List<AbstractGraphPath<TNode>> result, IAlgorithmCycleFinder<TNode> cycleFinder)
+                                        List<AbstractGraphPath<TNode>> result, ICycleOperations<TNode> cycleOperations)
         {
             var allsimplePaths = simplePaths.Where(x => CycleHelper<TNode>.GetPathCount(x) <= numberOfStops).ToList();
 
             var allsimpleCycles =
-                cycleFinder.FindAllSimpleCycles(graph)
+                cycleOperations.FindAllSimpleCycles(graph)
                            .Where(x => CycleHelper<TNode>.GetPathCount(x) < numberOfStops)
                            .ToList();
 

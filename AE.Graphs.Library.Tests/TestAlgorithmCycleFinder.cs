@@ -9,7 +9,7 @@ namespace AE.Graphs.Library.Tests
     ///     Summary description for TestCycleFinder
     /// </summary>
     [TestFixture]
-    public class TestAlgorithmCycleFinder
+    public class TestCycleOperations
     {
       
 
@@ -19,7 +19,7 @@ namespace AE.Graphs.Library.Tests
         {
            //Arrange
             var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
-            var sut = new AlgorithmCycleFinder<char>();
+            var sut = new CycleOperations<char>();
 
             //Act
             var actual = sut.FindAllSimpleCycles(graph);
@@ -34,7 +34,7 @@ namespace AE.Graphs.Library.Tests
         {
             //Arrange
             var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
-            var sut = new AlgorithmCycleFinder<char>();
+            var sut = new CycleOperations<char>();
 
             //Act
             var actual = sut.FindAllSimpleCycles(graph, isourceNode, imaxStops);
@@ -50,7 +50,7 @@ namespace AE.Graphs.Library.Tests
         {
             //Arrange
             var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
-            var sut = new AlgorithmCycleFinder<char>();
+            var sut = new CycleOperations<char>();
 
             //Act
             var actual = sut.FindAllCycles(graph, isourceNode, imaxWeight).OrderBy(x => x.Path.Count).ToList();

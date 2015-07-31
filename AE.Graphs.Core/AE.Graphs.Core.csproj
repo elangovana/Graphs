@@ -55,7 +55,7 @@
     <Compile Include="Exceptions\DuplicateNodeException.cs" />
     <Compile Include="Exceptions\EdgeNotFoundException.cs" />
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
-    <Compile Include="IAlgorithmCycleFinder.cs" />
+    <Compile Include="ICycleOperations.cs" />
     <Compile Include="IAlgorithmDepthFirstSearch.cs" />
     <Compile Include="IAlgorithmElementaryCircuitSearch.cs" />
     <Compile Include="IAlgorithmShortestPath.cs" />

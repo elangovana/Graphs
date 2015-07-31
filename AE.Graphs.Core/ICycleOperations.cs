@@ -2,7 +2,7 @@
 
 namespace AE.Graphs.Core
 {
-    public interface IAlgorithmCycleFinder<TNode>
+    public interface ICycleOperations<TNode>
     {
         List<AbstractGraphPath<TNode>> FindAllSimpleCycles(AbstractDiGraph<TNode> graph);
 
