@@ -50,7 +50,6 @@
     <Compile Include="AdjacencyGraphNode.cs" />
     <Compile Include="JohnsonCycle.cs" />
     <Compile Include="PathOperations.cs" />
-    <Compile Include="CycleHelper.cs" />
     <Compile Include="CycleOperations.cs" />
     <Compile Include="DepthFirstSearch.cs" />
     <Compile Include="DijkstrasShortestPathAlgorithm.cs" />

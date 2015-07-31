@@ -163,7 +163,7 @@ namespace AE.Graphs.Application
 
         private string CalculatePathCount(char snode, char dnode, int numberOfStops)
         {
-            string result = PathOperationsCalculator.FindAllPaths(_graph, snode, dnode, numberOfStops).Count.ToString();
+            string result = PathOperationsCalculator.CountAllPaths(_graph, snode, dnode, numberOfStops).ToString();
 
             return result;
         }

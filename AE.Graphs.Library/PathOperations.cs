@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AE.Graphs.Core;
 
@@ -26,41 +27,32 @@ namespace AE.Graphs.Library
             set { _pathFinder = value; }
         }
 
-        #region IPathOperations<TNode> Members
+      
 
-        public List<AbstractGraphPath<TNode>> FindAllPaths(AbstractDiGraph<TNode> graph, TNode source, TNode destination,
+        public int CountAllPaths(AbstractDiGraph<TNode> graph, TNode source, TNode destination,
                                                            int numberOfStops)
         {
-            var result = new List<AbstractGraphPath<TNode>>();
+            var result = 0;
             var simplePaths = PathFinder.FindAllSimplePaths(graph, source, destination);
-            ComputePath(graph, numberOfStops, simplePaths, result, CycleOperations);
+
+            result = simplePaths.Count(x=>x.Path.Count -1 == numberOfStops);
+           
+            //Find cycles that could intersect with paths with smaller stops and make  the path longer
+            var potentialPaths = simplePaths.Where(x => x.Path.Count < numberOfStops);
+            var cycles = CycleOperations.FindAllSimpleCycles(graph);
+
+            foreach (var potentialPath in potentialPaths)
+            {
+                var cyclesThatIntersection = cycles.Where(c => c.Path.Any(p => potentialPath.Path.Contains(p)) );
+
+                result += cyclesThatIntersection.Count(c => c.Path.Count - 1 + potentialPath.Path.Count - 1 == numberOfStops);
+            }
+
             return result;
         }
 
-        #endregion
+       
 
-        private static void ComputePath(AbstractDiGraph<TNode> graph, int numberOfStops,
-                                        List<AbstractGraphPath<TNode>> simplePaths,
-                                        List<AbstractGraphPath<TNode>> result, ICycleOperations<TNode> cycleOperations)
-        {
-            var allsimplePaths = simplePaths.Where(x => CycleHelper<TNode>.GetPathCount(x) <= numberOfStops).ToList();
-
-            var allsimpleCycles =
-                cycleOperations.FindAllSimpleCycles(graph)
-                           .Where(x => CycleHelper<TNode>.GetPathCount(x) < numberOfStops)
-                           .ToList();
-
-            foreach (var simplePath in allsimplePaths.Where(x => CycleHelper<TNode>.GetPathCount(x) < numberOfStops))
-            {
-                foreach (var simpleCycle in allsimpleCycles.Where(x => simplePath.Path.Contains(x.SourceNode)))
-                {
-                    CycleHelper<TNode>.AddCycles(numberOfStops, simplePath, simpleCycle, result);
-                }
-            }
-            foreach (var simplePath in allsimplePaths.Where(x => CycleHelper<TNode>.GetPathCount(x) == numberOfStops))
-            {
-                CycleHelper<TNode>.AddGrapthPath(simplePath, result);
-            }
-        }
+      
     }
 }
