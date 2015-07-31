@@ -9,6 +9,7 @@ namespace AE.Graphs.Library
     ///     An Implementation Of LEROY JOHNSON DCycle to find all Simple Cycles
     /// </summary>
     /// <typeparam name="TNode">Graph Node</typeparam>
+    /// <<see cref="http://www.cs.tufts.edu/comp/150GA/homeworks/hw1/Johnson%2075.PDF"/>
     public class DCycleLeroyJohnson<TNode> : IAlgorithmCycleFinder<TNode>
 
 
