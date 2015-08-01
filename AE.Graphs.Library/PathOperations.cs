@@ -7,12 +7,12 @@ namespace AE.Graphs.Library
 {
     public class PathOperations<TNode> : IPathOperations<TNode>
     {
-        #region Private
+      
 
         private ICycleOperations<TNode> _cycleFnder;
-        private IAlgorithmPathFinder<TNode> _pathFinder;
+        private IAlgorithmSimplePathSearch<TNode> _pathFinder;
 
-        #endregion
+       
 
         public ICycleOperations<TNode> CycleOperations
         {
@@ -21,13 +21,17 @@ namespace AE.Graphs.Library
         }
 
 
-        public IAlgorithmPathFinder<TNode> PathFinder
+        public IAlgorithmSimplePathSearch<TNode> PathFinder
         {
-            get { return (_pathFinder = _pathFinder ?? new PathFinder<TNode>()); }
+            get { return (_pathFinder = _pathFinder ?? new AlgorithmSimplePathSearch<TNode>()); }
             set { _pathFinder = value; }
         }
 
-      
+
+        public List<AbstractGraphPath<TNode>> FindAllSimplePaths(AbstractDiGraph<TNode> graph, TNode source, TNode destination)
+        {
+            return _pathFinder.FindAllSimplePaths(graph, source, destination);
+        }
 
         public int CountAllPaths(AbstractDiGraph<TNode> graph, TNode source, TNode destination,
                                                            int numberOfStops)

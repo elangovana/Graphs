@@ -11,11 +11,10 @@ namespace AE.Graphs.Application
     {
         private const string separator = ", ";
         private const int edgeLength = 3;
-        private ICycleOperations<char> _CycleCountCalculator;
-     
-      
-        private AbstractDiGraph<Char> _graph;
-        private IAlgorithmPathFinder<char> _pathCountCalculator;
+
+
+        private readonly AbstractDiGraph<Char> _graph;
+        private ICycleOperations<char> _CycleCountCalculator;     
         private IPathOperations<char> _pathOperations;
         private IAlgorithmShortestPath<char> _shortestPathCalculator;
 
@@ -34,7 +33,6 @@ namespace AE.Graphs.Application
             _graph = graph;
         }
 
-      
 
         public ICycleOperations<char> CycleCalculator
         {
@@ -49,13 +47,8 @@ namespace AE.Graphs.Application
             set { _shortestPathCalculator = value; }
         }
 
-        public IAlgorithmPathFinder<char> PathCountCalculator
-        {
-            get { return _pathCountCalculator ?? (_pathCountCalculator = new PathFinder<char>()); }
-            set { _pathCountCalculator = value; }
-        }
+     
 
-       
 
         public IPathOperations<char> PathOperationsCalculator
         {
@@ -67,21 +60,21 @@ namespace AE.Graphs.Application
         {
             var results = new List<string>();
 
-            ValidateGraphNodes(new List<char>() {'A', 'B', 'C', 'D', 'E'});
+            ValidateGraphNodes(new List<char> {'A', 'B', 'C', 'D', 'E'});
 
-            results.Add(CalculatePathWeight(new List<char>() {'A', 'B', 'C'}));
-
-
-            results.Add(CalculatePathWeight(new List<char>() {'A', 'D'}));
+            results.Add(CalculatePathWeight(new List<char> {'A', 'B', 'C'}));
 
 
-            results.Add(CalculatePathWeight(new List<char>() {'A', 'D', 'C'}));
+            results.Add(CalculatePathWeight(new List<char> {'A', 'D'}));
 
 
-            results.Add(CalculatePathWeight(new List<char>() {'A', 'E', 'B', 'C', 'D'}));
+            results.Add(CalculatePathWeight(new List<char> {'A', 'D', 'C'}));
 
 
-            results.Add(CalculatePathWeight(new List<char>() {'A', 'E', 'D'}));
+            results.Add(CalculatePathWeight(new List<char> {'A', 'E', 'B', 'C', 'D'}));
+
+
+            results.Add(CalculatePathWeight(new List<char> {'A', 'E', 'D'}));
 
 
             results.Add(CalculateCycleCount('C', 3));
@@ -106,7 +99,7 @@ namespace AE.Graphs.Application
         {
             if (nodes.Any(x => !_graph.AllNodes.Contains(x)))
             {
-                var validNodesList = string.Join(", ", nodes);
+                string validNodesList = string.Join(", ", nodes);
                 throw new ArgumentException(
                     string.Format("The graph does not contain all the nodes {0} to run the builtin operations",
                                   validNodesList));
@@ -115,9 +108,9 @@ namespace AE.Graphs.Application
 
         private void ConstructGraph(string graph)
         {
-            var edgeList = Validate(graph);
+            IEnumerable<string> edgeList = Validate(graph);
 
-            foreach (var edgeString in edgeList)
+            foreach (string edgeString in edgeList)
             {
                 _graph.AddEdge(edgeString[0], edgeString[1], Convert.ToInt32(edgeString[2].ToString()));
             }
@@ -125,7 +118,7 @@ namespace AE.Graphs.Application
 
         private static IEnumerable<string> Validate(string graph)
         {
-            var edgeList = graph.Split(new string[] {separator}, StringSplitOptions.None);
+            string[] edgeList = graph.Split(new[] {separator}, StringSplitOptions.None);
             int tmpweight;
             if (edgeList.Any(x => x.Length < edgeLength))
                 throw new FormatException(
@@ -172,7 +165,8 @@ namespace AE.Graphs.Application
         {
             string result;
 
-            var shortestPath = ShortestPathCalulator.GetShortestPath(_graph, sourceNode, destinationNode);
+            AbstractGraphPath<char> shortestPath = ShortestPathCalulator.GetShortestPath(_graph, sourceNode,
+                                                                                         destinationNode);
             result =
                 shortestPath == null ? "NO SUCH ROUTE" : shortestPath.PathWeight.ToString();
 
@@ -183,7 +177,7 @@ namespace AE.Graphs.Application
         private string CalculateShortestCycle(char sourceNode)
         {
             string result = "NO CYCLE";
-            var shortestCycles = CycleCalculator.FindShortestCycle(_graph, sourceNode);
+            List<AbstractGraphPath<char>> shortestCycles = CycleCalculator.FindShortestCycle(_graph, sourceNode);
 
             if (shortestCycles.Any())
             {
@@ -195,7 +189,7 @@ namespace AE.Graphs.Application
 
         private string CalculateCyclesWithMaxWeight(char node, int maxWeight)
         {
-            var count = CycleCalculator.CountAllCycles(_graph, node, maxWeight);
+            int count = CycleCalculator.CountAllCycles(_graph, node, maxWeight);
 
             return count.ToString();
         }

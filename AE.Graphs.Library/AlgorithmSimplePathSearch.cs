@@ -5,9 +5,9 @@ using AE.Graphs.Core;
 
 namespace AE.Graphs.Library
 {
-    public class PathFinder<TNode> : IAlgorithmPathFinder<TNode>
+    public class AlgorithmSimplePathSearch<TNode> : IAlgorithmSimplePathSearch<TNode>
     {
-        public PathFinder()
+        public AlgorithmSimplePathSearch()
         {
             _allpaths = new List<AbstractGraphPath<TNode>>();
             _vistedEdges = new List<Tuple<TNode, TNode, int>>();
@@ -44,9 +44,9 @@ namespace AE.Graphs.Library
         }
 
 
-        private PathFinder<TNode> InitialiseAndGetInstance(AbstractDiGraph<TNode> graph, TNode startNode)
+        private AlgorithmSimplePathSearch<TNode> InitialiseAndGetInstance(AbstractDiGraph<TNode> graph, TNode startNode)
         {
-            var pathFinder = new PathFinder<TNode>();
+            var pathFinder = new AlgorithmSimplePathSearch<TNode>();
             pathFinder.RemoveCycles(graph, startNode);
             pathFinder.Initialise();
             return pathFinder;

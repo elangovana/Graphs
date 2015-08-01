@@ -14,7 +14,7 @@ namespace AE.Graphs.Library.Tests
         {
            //Arrange
             var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
-            var sut = new PathFinder<Char>();
+            var sut = new AlgorithmSimplePathSearch<Char>();
 
             //Assert
             var actual = sut.FindAllSimplePaths(graph, isourceNode, idestinationNode);

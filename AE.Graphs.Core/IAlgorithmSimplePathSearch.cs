@@ -2,7 +2,7 @@
 
 namespace AE.Graphs.Core
 {
-    public interface IAlgorithmPathFinder<TNode>
+    public interface IAlgorithmSimplePathSearch<TNode>
     {
         List<AbstractGraphPath<TNode>> FindAllSimplePaths(AbstractDiGraph<TNode> graph, TNode source, TNode destination);
     }
