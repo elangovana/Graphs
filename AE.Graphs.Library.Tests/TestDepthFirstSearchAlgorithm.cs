@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace AE.Graphs.Library.Tests
 {
     [TestFixture]
-    public class TestAlgorithmDFS
+    public class TestDepthFirstSearchAlgorithm
     {
         [TestCase("121-231-261-341-361-451-461-561-621-631-641", "121-231-341-451-561")]
         public void ShouldReturnDfsTreeEdges(string graph, string expected)

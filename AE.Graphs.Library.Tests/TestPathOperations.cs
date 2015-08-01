@@ -22,6 +22,21 @@ namespace AE.Graphs.Library.Tests
             Assert.AreEqual(expectedNoOfPaths, actual);
         }
 
+
+        [TestCase(" AB5 - BC4 - CD8 - DC8 - DE6 - AD5 - CE2 - EB3 - AE7", 'A', 'C', 4)]
+        public void ShouldCountSimplePathsGivenSourceAndDestinationNode(string igraph, char isourceNode, char idestinationNode, int expectedNofPaths)
+        {
+            //Arrange
+            var graph = GraphLoaderHelper.LoadGraphFromString(igraph);
+            var sut = new PathOperations<Char>();
+
+            //Assert
+            var actual = sut.FindAllSimplePaths(graph, isourceNode, idestinationNode);
+
+            //Act
+            Assert.AreEqual(expectedNofPaths, actual.Count);
+        }
+
       
     }
 }

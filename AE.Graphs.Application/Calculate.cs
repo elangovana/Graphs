@@ -9,12 +9,12 @@ namespace AE.Graphs.Application
 {
     internal class Calculate
     {
-        private const string separator = ", ";
-        private const int edgeLength = 3;
+        private const string Separator = ", ";
+        private const int EdgeLength = 3;
 
 
         private readonly AbstractDiGraph<Char> _graph;
-        private ICycleOperations<char> _CycleCountCalculator;     
+        private ICycleOperations<char> _cycleCountCalculator;     
         private IPathOperations<char> _pathOperations;
         private IAlgorithmShortestPath<char> _shortestPathCalculator;
 
@@ -36,8 +36,8 @@ namespace AE.Graphs.Application
 
         public ICycleOperations<char> CycleCalculator
         {
-            get { return _CycleCountCalculator ?? (_CycleCountCalculator = new CycleOperations<char>()); }
-            set { _CycleCountCalculator = value; }
+            get { return _cycleCountCalculator ?? (_cycleCountCalculator = new CycleOperations<char>()); }
+            set { _cycleCountCalculator = value; }
         }
 
 
@@ -118,9 +118,9 @@ namespace AE.Graphs.Application
 
         private static IEnumerable<string> Validate(string graph)
         {
-            string[] edgeList = graph.Split(new[] {separator}, StringSplitOptions.None);
+            string[] edgeList = graph.Split(new[] {Separator}, StringSplitOptions.None);
             int tmpweight;
-            if (edgeList.Any(x => x.Length < edgeLength))
+            if (edgeList.Any(x => x.Length < EdgeLength))
                 throw new FormatException(
                     string.Format("The graph {0} is invalid. \nSee sample format sample: AB1, BC2 ", graph));
             if (edgeList.Any(x => !int.TryParse(x.Substring(2), out tmpweight)))
@@ -163,12 +163,9 @@ namespace AE.Graphs.Application
 
         private string CalculateShortestPath(char sourceNode, char destinationNode)
         {
-            string result;
-
             AbstractGraphPath<char> shortestPath = ShortestPathCalulator.GetShortestPath(_graph, sourceNode,
                                                                                          destinationNode);
-            result =
-                shortestPath == null ? "NO SUCH ROUTE" : shortestPath.PathWeight.ToString();
+            string result = shortestPath == null ? "NO SUCH ROUTE" : shortestPath.PathWeight.ToString();
 
 
             return result;
