@@ -4,7 +4,7 @@ using AE.Graphs.Core;
 
 namespace AE.Graphs.Library
 {
-    public class DepthFirstSearch<TNode> : IAlgorithmDepthFirstSearch<TNode>
+    public class DepthFirstSearchAlgorithm<TNode> : IAlgorithmDepthFirstSearch<TNode>
     {
         private readonly List<DepthFirstSearchEdge<TNode>> _dfsEdges;
         private readonly Dictionary<TNode, int> _endTime;
@@ -15,7 +15,7 @@ namespace AE.Graphs.Library
 
         private int _time;
 
-        public DepthFirstSearch()
+        public DepthFirstSearchAlgorithm()
         {
             _dfsEdges = new List<DepthFirstSearchEdge<TNode>>();
             _parent = new Dictionary<TNode, TNode>();
@@ -42,7 +42,7 @@ namespace AE.Graphs.Library
 
         public List<DepthFirstSearchEdge<TNode>> TraverseGraph(AbstractDiGraph<TNode> graph, TNode sourceNode)
         {
-            var search = new DepthFirstSearch<TNode>();
+            var search = new DepthFirstSearchAlgorithm<TNode>();
             search.DFSVisit(graph, sourceNode);
             return search._dfsEdges;
         }

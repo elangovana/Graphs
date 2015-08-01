@@ -32,7 +32,7 @@ namespace AE.Graphs.Library
 
         public IAlgorithmDepthFirstSearch<TNode> DFSAlgorithm
         {
-            get { return (_DFSAlgorithm = _DFSAlgorithm ?? new DepthFirstSearch<TNode>()); }
+            get { return (_DFSAlgorithm = _DFSAlgorithm ?? new DepthFirstSearchAlgorithm<TNode>()); }
             set { _DFSAlgorithm = value; }
         }
 

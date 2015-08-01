@@ -11,7 +11,7 @@ namespace AE.Graphs.Library.Tests
         public void ShouldReturnDfsTreeEdges(string graph, string expected)
         {
             //Arrange
-            var sut = new DepthFirstSearch<char>();
+            var sut = new DepthFirstSearchAlgorithm<char>();
 
             //Act
             var result = sut.TraverseGraph(GraphLoaderHelper.LoadGraphFromString(graph));
@@ -27,7 +27,7 @@ namespace AE.Graphs.Library.Tests
         [TestCase("121-231-261-341-361-451-461-561-621-631-641", "621-631-641")]
         public void ShouldReturnDfsBackEdges(string graph, string expected)
         {
-            var sut = new DepthFirstSearch<char>();
+            var sut = new DepthFirstSearchAlgorithm<char>();
 
             var result = sut.TraverseGraph(GraphLoaderHelper.LoadGraphFromString(graph));
 
@@ -45,7 +45,7 @@ namespace AE.Graphs.Library.Tests
         public void ShouldTraverseAllEdges(string graph, string expected)
         {
             //Arrange
-            var sut = new DepthFirstSearch<char>();
+            var sut = new DepthFirstSearchAlgorithm<char>();
 
             //Act
             var result = sut.TraverseGraph(GraphLoaderHelper.LoadGraphFromString(graph));

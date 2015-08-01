@@ -51,7 +51,7 @@
     <Compile Include="JohnsonCycleAlgorithm.cs" />
     <Compile Include="PathOperations.cs" />
     <Compile Include="CycleOperations.cs" />
-    <Compile Include="DepthFirstSearch.cs" />
+    <Compile Include="DepthFirstSearchAlgorithm.cs" />
     <Compile Include="DijkstrasShortestPathAlgorithm.cs" />
     <Compile Include="Exceptions\InvalidEdgeWeightException.cs" />
     <Compile Include="Exceptions\DuplicateEdgeException.cs" />
