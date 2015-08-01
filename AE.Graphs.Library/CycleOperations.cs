@@ -13,7 +13,7 @@ namespace AE.Graphs.Library
             get
             {
                 return _algorithmElementaryCircuitSearch ??
-                       (_algorithmElementaryCircuitSearch = new JohnsonCycle<TNode>());
+                       (_algorithmElementaryCircuitSearch = new JohnsonCycleAlgorithm<TNode>());
             }
             set { _algorithmElementaryCircuitSearch = value; }
         }

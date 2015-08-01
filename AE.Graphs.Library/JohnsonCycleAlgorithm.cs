@@ -10,7 +10,7 @@ namespace AE.Graphs.Library
     /// </summary>
     /// <typeparam name="TNode">Graph Node</typeparam>
     /// <see cref="http://www.cs.tufts.edu/comp/150GA/homeworks/hw1/Johnson%2075.PDF" />
-    public class JohnsonCycle<TNode> : IAlgorithmElementaryCircuitSearch<TNode>
+    public class JohnsonCycleAlgorithm<TNode> : IAlgorithmElementaryCircuitSearch<TNode>
     {
         private List<AbstractGraphPath<TNode>> _allcycles;
         private Stack<TNode> _oStack;
