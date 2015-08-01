@@ -5,9 +5,13 @@ using AE.Graphs.Core;
 
 namespace AE.Graphs.Library
 {
-    public class AlgorithmSimplePathSearch<TNode> : IAlgorithmSimplePathSearch<TNode>
+    /// <summary>
+    ///     A hacked version of johnson cycle algorithm applied to simple paths.. Need to a find a better algorithm
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
+    public class SimplePathSearchAlgorithm<TNode> : IAlgorithmSimplePathSearch<TNode>
     {
-        public AlgorithmSimplePathSearch()
+        public SimplePathSearchAlgorithm()
         {
             _allpaths = new List<AbstractGraphPath<TNode>>();
             _vistedEdges = new List<Tuple<TNode, TNode, int>>();
@@ -44,9 +48,9 @@ namespace AE.Graphs.Library
         }
 
 
-        private AlgorithmSimplePathSearch<TNode> InitialiseAndGetInstance(AbstractDiGraph<TNode> graph, TNode startNode)
+        private SimplePathSearchAlgorithm<TNode> InitialiseAndGetInstance(AbstractDiGraph<TNode> graph, TNode startNode)
         {
-            var pathFinder = new AlgorithmSimplePathSearch<TNode>();
+            var pathFinder = new SimplePathSearchAlgorithm<TNode>();
             pathFinder.RemoveCycles(graph, startNode);
             pathFinder.Initialise();
             return pathFinder;
@@ -55,8 +59,8 @@ namespace AE.Graphs.Library
 
         private void RemoveCycles(AbstractDiGraph<TNode> graph, TNode startNode)
         {
-            var dfsEdges = DFSAlgorithm.TraverseGraph(graph, startNode);
-            var _backedges =
+            List<DepthFirstSearchEdge<TNode>> dfsEdges = DFSAlgorithm.TraverseGraph(graph, startNode);
+            List<DepthFirstSearchEdge<TNode>> _backedges =
                 dfsEdges.Where(
                     x => x.EdgeType == DepthFirstSearchEdgeType.BackEdge && x.DestinationNode.Equals(startNode))
                         .ToList();
@@ -75,7 +79,7 @@ namespace AE.Graphs.Library
         private void FindSimplepath(TNode sourceNode, TNode dNode)
         {
             _vStack.Push(sourceNode);
-            var keyNode = sourceNode;
+            TNode keyNode = sourceNode;
             Advance(keyNode, dNode, keyNode);
         }
 
@@ -118,10 +122,10 @@ namespace AE.Graphs.Library
         private bool GetUnvistedEdge(AbstractDiGraph<TNode> graph, TNode sourceNode, out TNode destinationNode)
         {
             destinationNode = default(TNode);
-            var hasUnvistitedNodes = graph.GetNeighbourNodes(sourceNode)
-                                          .Any(
-                                              y =>
-                                              !_vistedEdges.Any(x => x.Item1.Equals(sourceNode) && x.Item2.Equals(y)));
+            bool hasUnvistitedNodes = graph.GetNeighbourNodes(sourceNode)
+                                           .Any(
+                                               y =>
+                                               !_vistedEdges.Any(x => x.Item1.Equals(sourceNode) && x.Item2.Equals(y)));
 
             if (hasUnvistitedNodes)
             {
@@ -141,7 +145,7 @@ namespace AE.Graphs.Library
             path.DestinationNode = dnode;
             path.Path = new List<TNode>();
 
-            var stacklist = _vStack.ToList();
+            List<TNode> stacklist = _vStack.ToList();
 
             int i = 0;
             while (!stacklist[i].Equals(node))
@@ -164,7 +168,7 @@ namespace AE.Graphs.Library
 
         private void ReTreat(TNode sourceNode, TNode dNode)
         {
-            var node = _vStack.Pop();
+            TNode node = _vStack.Pop();
             if (!_oStack.Contains(node)) _oStack.Push(node);
             MarkOriginatingEdgesAsUnVisted(node);
             if (_vStack.Any())
@@ -176,14 +180,15 @@ namespace AE.Graphs.Library
 
         private void MarkEdgeAsVisted(TNode sourceNode, TNode destNode)
         {
-            var edgeTuple = _unvistedEdges.Single(x => x.Item1.Equals(sourceNode) && x.Item2.Equals(destNode));
+            Tuple<TNode, TNode, int> edgeTuple =
+                _unvistedEdges.Single(x => x.Item1.Equals(sourceNode) && x.Item2.Equals(destNode));
             _unvistedEdges.Remove(edgeTuple);
             _vistedEdges.Add(edgeTuple);
         }
 
         private void MarkOriginatingEdgesAsUnVisted(TNode node)
         {
-            var edgeTuples = _vistedEdges.Where(x => x.Item1.Equals(node)).ToList();
+            List<Tuple<TNode, TNode, int>> edgeTuples = _vistedEdges.Where(x => x.Item1.Equals(node)).ToList();
             foreach (var edgeTuple in edgeTuples)
             {
                 _unvistedEdges.Add(edgeTuple);
@@ -198,7 +203,7 @@ namespace AE.Graphs.Library
         public List<AbstractGraphPath<TNode>> FindAllSimplePaths(AbstractDiGraph<TNode> graph, TNode source,
                                                                  TNode destination)
         {
-            var pathFinder = InitialiseAndGetInstance(graph, source);
+            SimplePathSearchAlgorithm<TNode> pathFinder = InitialiseAndGetInstance(graph, source);
 
             pathFinder.FindSimplepath(source, destination);
 

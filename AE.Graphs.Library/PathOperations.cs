@@ -19,7 +19,7 @@ namespace AE.Graphs.Library
 
         public IAlgorithmSimplePathSearch<TNode> PathFinder
         {
-            get { return (_pathFinder = _pathFinder ?? new AlgorithmSimplePathSearch<TNode>()); }
+            get { return (_pathFinder = _pathFinder ?? new SimplePathSearchAlgorithm<TNode>()); }
             set { _pathFinder = value; }
         }
 

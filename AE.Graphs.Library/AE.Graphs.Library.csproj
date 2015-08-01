@@ -56,7 +56,7 @@
     <Compile Include="Exceptions\InvalidEdgeWeightException.cs" />
     <Compile Include="Exceptions\DuplicateEdgeException.cs" />
     <Compile Include="GraphPath.cs" />
-    <Compile Include="AlgorithmSimplePathSearch.cs" />
+    <Compile Include="SimplePathSearchAlgorithm.cs" />
     <Compile Include="RailwayNetworkWeightedDiGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
